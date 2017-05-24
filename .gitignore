@@ -1,3 +1,11 @@
+blog_application.sublime-project
+blog_application.sublime-workspace
+.env
+staticfiles
+venv
+*.pyc
+settings/local.py
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
