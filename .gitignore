@@ -7,7 +7,7 @@ blog/migrations/
 staticfiles
 venv
 *.pyc
-settings/local.py
+blog_application/settings/local.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
