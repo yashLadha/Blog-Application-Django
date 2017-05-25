@@ -1,6 +1,9 @@
 blog_application.sublime-project
 blog_application.sublime-workspace
 .env
+
+blog/migrations/
+
 staticfiles
 venv
 *.pyc
