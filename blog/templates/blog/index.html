@@ -1,0 +1,17 @@
+<body>
+  {% if user_all_posts %}
+    <ul>
+      {% for post in user_all_posts %}
+	<li><a href="#">{{ post.title }}</li>
+      {% endfor %}
+    </ul>
+    {% if user_all_posts.has_previous %}
+      <a href="?page={{ user_all_posts.previous_page_number }}">Previous</a>
+    {% endif %}
+    {% if user_all_posts.has_next %}
+      <a href="?page={{ user_all_posts.next_page_number }}">Next</a>
+    {% endif %}
+  {% else %}
+    <p>No such user exists</p>
+  {% endif %}
+</body>
