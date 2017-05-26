@@ -3,6 +3,7 @@ blog_application.sublime-workspace
 .env
 
 blog/migrations/
+basic/migrations/
 
 staticfiles
 venv
