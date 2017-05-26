@@ -13,6 +13,7 @@ html, body {
     width: 100%;
     margin: auto;
     background: url(../img/nature.jpg) no-repeat 50% 50%;
+    background-attachment: fixed;
     display: table;
     top: 0;
     background-size: cover;
