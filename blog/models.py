@@ -2,14 +2,34 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.core.exceptions import ValidationError
+from django.contrib.auth.models import User
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 
 
-class User(models.Model):
+class Profile(models.Model):
     """ Model representation of User
+    Custom user model for blog app
     """
 
     def __str__(self):
-        return str(self.id)
+        return str(self.user)
+
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    birth_date = models.DateField(null=True)
+    description = models.TextField(max_length=100, null=True)
+
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    """ Creates a custom user """
+    if created:
+        Profile.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    """ Saves a custom user """
+    instance.profile.save()
 
 
 class Post(models.Model):
@@ -32,7 +52,7 @@ class Post(models.Model):
     date = models.DateTimeField(auto_now=True)
     tags = models.CharField(max_length=50)
     title = models.CharField(max_length=100)
-    author = models.OneToOneField(User)
+    author = models.OneToOneField(Profile)
     descriptiom = models.TextField()
 
 

@@ -4,6 +4,10 @@ blog_application.sublime-workspace
 
 blog/migrations/
 basic/migrations/
+.idea/
+.idea/dataSources.xml
+.idea/vcs.xml
+*~
 
 staticfiles
 venv
