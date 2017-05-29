@@ -9,7 +9,9 @@ from django.db.models.signals import post_save
 
 class Profile(models.Model):
     """ Model representation of User
-    Custom user model for blog app
+    user        : Default User module
+    birth_date  : birth date of the user
+    description : description about themselves
     """
 
     def __str__(self):
@@ -25,6 +27,7 @@ def create_user_profile(sender, instance, created, **kwargs):
     """ Creates a custom user """
     if created:
         Profile.objects.create(user=instance)
+
 
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
@@ -42,7 +45,7 @@ class Post(models.Model):
     """
 
     def __str__(self):
-        return str(self.id) + " " + self.title + " " + self.author
+        return str(self.id) + " " + self.title + " " + str(self.author)
 
     @staticmethod
     def get_user_post(user):
@@ -52,7 +55,7 @@ class Post(models.Model):
     date = models.DateTimeField(auto_now=True)
     tags = models.CharField(max_length=50)
     title = models.CharField(max_length=100)
-    author = models.OneToOneField(Profile)
+    author = models.OneToOneField(Profile, on_delete=models.CASCADE)
     descriptiom = models.TextField()
 
 
@@ -85,3 +88,16 @@ class Register(models.Model):
     password = models.CharField(max_length=100)
     email = models.EmailField()
     phoneNumber = models.CharField(max_length=10)
+
+
+class Vote(models.Model):
+    """ Model representation of Vote
+    post    : Post for voting
+    up_vote : up votes on the post
+    """
+
+    def __str__(self):
+        return str(self.post) + ":" + self.up_vote
+
+    post = models.OneToOneField(Post, on_delete=models.CASCADE)
+    up_vote = models.PositiveIntegerField(default=0)

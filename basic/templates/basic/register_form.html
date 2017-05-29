@@ -1,19 +1,52 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Registration Form</title>
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static "basic/assets/css/style.css" %}">
-  </head>
-  <body>
-    <p>Register Page</p>
-    <h1>Welcome to register page</h1>
-    <form action="/register/" method="Post">
-      {% csrf_token %}
-      <div class="container">
-	<label>UserName<label>
-	  <input type="text" placeholder="Enter user name" name="User Name" required>
+<head>
+  <title>Registration Form</title>
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static "basic/assets/css/style.css" %}">
+  <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300,600'>
+</head>
+<body>
+  <div class="cont_principal">
+    <div class="cont_centrar">
+      <div class="cont_login">
+        <form action="">
+          <div class="cont_tabs_login">
+            <ul class="ul_tabs">
+            <li class="active">
+              <a href="#" onclick="sign_in()">SIGN IN</a>
+              <span class="linea_bajo_nom"></span>
+            </li>
+            <li>
+              <a href="#up" onclick="sign_up()">SIGN UP</a>
+              <span class="linea_bajo_nom"></span>
+            </li>
+            </ul>
+          </div>
+          <div class="cont_text_inputs">
+            <input type="text" name="name_us" class="input_form_sign" placeholder="NAME"/>
+            <input type="text" name="email_us" class="input_form_sign d_block active_inp" placeholder="EMAIL"/>
+            <input type="password" name="pass_us" class="input_form_sign d_block active_inp" placeholder="PASSWORD"/>
+            <input type="password" name="conf_pass_us" class="input_form_sign" placeholder="CONFIRM PASSWORD"/>
+            <input type="text" name="description_about_you" class="input_form_sign active_inp" placeholder="DESCRIPTION"/>
+            <a href="#" class="link_forgot_pass d_block">Forgot Password ?</a>
+            <div class="terms_and_cons d_none">
+              <p>
+                <input type="checkbox" name="terms_and_cons" />
+                <label for="terms_and_cons">
+                  Accept Terms and conditions.
+                </label>
+              </p>
+            </div>
+          </div>
+          <div class="cont_btn">
+            <button class="btn_sign">Sign In</button>
+          </div>
+        </form>
       </div>
-    </form>
-  </body>
-</html>
+    </div>
+  </div>
+  {% load static %}
+  <script src="{% static "basic/assets/js/index.js" %}"></script>
+ </body>
+ </html>
