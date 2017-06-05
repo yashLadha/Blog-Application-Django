@@ -18,9 +18,13 @@ class Profile(models.Model):
     def __str__(self):
         return str(self.user)
 
+    @staticmethod
+    def create_profile(user_name, email, password):
+        """ Create user profile object """
+        user = User.objects.create_user(user_name, email, password)
+        user.save()
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    birth_date = models.DateField(null=True)
-    description = models.TextField(max_length=100, null=True)
 
 
 @receiver(post_save, sender=User)
