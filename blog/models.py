@@ -1,4 +1,5 @@
 from __future__ import unicode_literals
+from taggit.managers import TaggableManager
 
 from django.db import models
 from django.core.exceptions import ValidationError
@@ -38,7 +39,7 @@ def save_user_profile(sender, instance, **kwargs):
 class Post(models.Model):
     """ Model representation of post
     date        : date of posting the post
-    tags        : tag of the post
+    tags        : tag's of the post
     title       : title of the post
     author      : author name
     description : main content of the post
@@ -53,7 +54,7 @@ class Post(models.Model):
         return Post.objects.filter(author=user).order_by('-date')
 
     date = models.DateTimeField(auto_now=True)
-    tags = models.CharField(max_length=50)
+    tags = TaggableManager()
     title = models.CharField(max_length=100)
     author = models.OneToOneField(Profile, on_delete=models.CASCADE)
     descriptiom = models.TextField()
@@ -100,4 +101,4 @@ class Vote(models.Model):
         return str(self.post) + ":" + self.up_vote
 
     post = models.OneToOneField(Post, on_delete=models.CASCADE)
-    up_vote = models.PositiveIntegerField(default=0)
+    up_vote = models.ManyToManyField(Profile)
