@@ -121,4 +121,3 @@ ENV/
 .mypy_cache/
 .codeintel/
 TAGS
-signup/
