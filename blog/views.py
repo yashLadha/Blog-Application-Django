@@ -1,9 +1,11 @@
-from django.shortcuts import render, HttpResponse
 from django.core.paginator import Paginator, EmptyPage
+from django.shortcuts import render, HttpResponse
 
 from .models import Post
 
+
 def index(request):
+    """ returns the index view of the app """
     return HttpResponse("Blog Index Page", request)
 
 

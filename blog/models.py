@@ -1,11 +1,10 @@
 from __future__ import unicode_literals
-from taggit.managers import TaggableManager
 
-from django.db import models
-from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
-from django.dispatch import receiver
+from django.db import models
 from django.db.models.signals import post_save
+from django.dispatch import receiver
+from taggit.managers import TaggableManager
 
 
 class Profile(models.Model):
@@ -62,37 +61,6 @@ class Post(models.Model):
     title = models.CharField(max_length=100)
     author = models.OneToOneField(Profile, on_delete=models.CASCADE)
     descriptiom = models.TextField()
-
-
-class Register(models.Model):
-    """ Model representation of Register
-    username    : username of the user
-    token       : csrf token for the user
-    password    : password of the user
-    email       : email of the user
-    phoneNumber : phoneNumber of the user
-    """
-    def __str__(self):
-        return self.username
-
-    @staticmethod
-    def is_user_exists(user_name):
-        """ check for exisitng user """
-        if Register.objects.filter(username=user_name):
-            return False
-
-    def save(self, force_insert=False, force_update=False, using=None,
-             update_fields=None):
-        if not Register.is_user_exists(self.username):
-            raise ValidationError('User already exist')
-        else:
-            super(Register, self).save()
-
-    username = models.CharField(max_length=50)
-    token = models.CharField(max_length=100)
-    password = models.CharField(max_length=100)
-    email = models.EmailField()
-    phoneNumber = models.CharField(max_length=10)
 
 
 class Vote(models.Model):

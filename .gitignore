@@ -2,9 +2,11 @@ blog_application.sublime-project
 blog_application.sublime-workspace
 .env
 
+tags
 .tags
 .tags_sorted_by_file
 blog/migrations/
+signup/migrations/
 basic/migrations/
 .idea/
 .idea/dataSources.xml
@@ -117,3 +119,6 @@ ENV/
 
 # mypy
 .mypy_cache/
+.codeintel/
+TAGS
+signup/
