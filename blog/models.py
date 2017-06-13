@@ -1,42 +1,11 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from taggit.managers import TaggableManager
-
-
-class Profile(models.Model):
-    """ Model representation of User
-    user        : Default User module
-    birth_date  : birth date of the user
-    description : description about themselves
-    """
-
-    def __str__(self):
-        return str(self.user)
-
-    @staticmethod
-    def create_profile(user_name, email, password):
-        """ Create user profile object """
-        user = User.objects.create_user(user_name, email, password)
-        user.save()
-
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-
-
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    """ Creates a custom user """
-    if created:
-        Profile.objects.create(user=instance)
-
-
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-    """ Saves a custom user """
-    instance.profile.save()
 
 
 class Post(models.Model):
@@ -56,11 +25,21 @@ class Post(models.Model):
         """ get all posts of user """
         return Post.objects.filter(author=user).order_by('-date')
 
+    def upvote(self):
+        vote_obj = get_object_or_404(Vote, post=self)
+        print vote_obj
+
     date = models.DateTimeField(auto_now=True)
     tags = TaggableManager()
     title = models.CharField(max_length=100)
-    author = models.OneToOneField(Profile, on_delete=models.CASCADE)
+    author = models.OneToOneField(User, on_delete=models.CASCADE)
     descriptiom = models.TextField()
+
+
+@receiver(post_save, sender=Post)
+def create_vote(sender, instance, **kwargs):
+    v = Vote(post=instance)
+    v.save()
 
 
 class Vote(models.Model):
@@ -70,7 +49,7 @@ class Vote(models.Model):
     """
 
     def __str__(self):
-        return str(self.post) + ":" + self.up_vote
+        return str(self.post) + " : " + str(self.up_vote.count())
 
     post = models.OneToOneField(Post, on_delete=models.CASCADE)
-    up_vote = models.ManyToManyField(Profile)
+    up_vote = models.ManyToManyField(User)

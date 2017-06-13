@@ -1,0 +1,25 @@
+<head>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		function up_vote (id) {
+			$.get("/upvote/" + id, function(data) {
+				console.log('Counter Incremented');
+			});
+		}
+
+		function down_vote (id) {
+			$.get("/downvote/" + id, function(data) {
+				console.log('Counter Decremented');
+			});
+		}
+	</script>
+</head>
+<body>
+	<h1>Fetches all the post {{ user }} </h1>
+	<ul>
+		{% for post in user_posts %}
+			<li> {{ post.title }} </li>
+			<a href="#" onclick="up_vote({{post.id}})">Upvote</a> <br> <a href="#" onclick="down_vote({{post.id}})">Downvote</a>
+		{% endfor %}
+	</ul>
+</body>
