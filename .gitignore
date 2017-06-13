@@ -16,6 +16,9 @@ staticfiles/
 .idea/vcs.xml
 *~
 
+*.json
+*.sqlite3
+
 venv
 *.pyc
 blog_application/settings/local.py
