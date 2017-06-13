@@ -8,12 +8,14 @@ tags
 blog/migrations/
 signup/migrations/
 basic/migrations/
+Profile/migrations/
+*.pyc
+staticfiles/
 .idea/
 .idea/dataSources.xml
 .idea/vcs.xml
 *~
 
-staticfiles
 venv
 *.pyc
 blog_application/settings/local.py
