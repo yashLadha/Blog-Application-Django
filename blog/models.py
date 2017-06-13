@@ -26,13 +26,24 @@ class Post(models.Model):
         return Post.objects.filter(author=user).order_by('-date')
 
     def upvote(self):
+        """ upvotes a post"""
         vote_obj = get_object_or_404(Vote, post=self)
         print vote_obj
+
+    def up_vote_count(self):
+        """returns the upvote for a post"""
+        vote_obj = get_object_or_404(Vote, post=self)
+        return vote_obj.up_vote.count()
+
+    @staticmethod
+    def latest_posts():
+        """ retrieves latest post """
+        return Post.objects.all().order_by('-date')
 
     date = models.DateTimeField(auto_now=True)
     tags = TaggableManager()
     title = models.CharField(max_length=100)
-    author = models.OneToOneField(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     descriptiom = models.TextField()
 
 
@@ -51,5 +62,5 @@ class Vote(models.Model):
     def __str__(self):
         return str(self.post) + " : " + str(self.up_vote.count())
 
-    post = models.OneToOneField(Post, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
     up_vote = models.ManyToManyField(User)

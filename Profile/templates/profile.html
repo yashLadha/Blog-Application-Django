@@ -1,25 +1,33 @@
 <head>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	<script type="text/javascript">
-		function up_vote (id) {
-			$.get("/upvote/" + id, function(data) {
-				console.log('Counter Incremented');
-			});
-		}
-
-		function down_vote (id) {
-			$.get("/downvote/" + id, function(data) {
-				console.log('Counter Decremented');
-			});
-		}
-	</script>
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+   <script type="text/javascript">
+function up_vote (id, counter) {
+   $.get("/upvote/" + id, function(data) {
+      console.log('Counter Incremented');
+      console.log(counter);
+      document.getElementById('up_vote_text_' + id).value = counter+1;
+   });
+}
+   </script>
 </head>
 <body>
-	<h1>Fetches all the post {{ user }} </h1>
-	<ul>
-		{% for post in user_posts %}
-			<li> {{ post.title }} </li>
-			<a href="#" onclick="up_vote({{post.id}})">Upvote</a> <br> <a href="#" onclick="down_vote({{post.id}})">Downvote</a>
-		{% endfor %}
-	</ul>
+   <h1>Fetches all the post {{ user }} </h1>
+   <ul>
+      {% for post in user_posts %}
+      <li> {{ post.title }} </li>
+      <button onclick="up_vote({{post.id}}, {{ post.up_vote_count }} )">Upvote</button>
+      <input type="text" id="up_vote_text_{{ post.id }}" value="{{ post.up_vote_count }}">
+      {% endfor %}
+   </ul>
+   <h1>Write posts</h1>
+   <a href="/profile/write">Write Post</a>
+   <h1>All user posts</h1>
+   <ul>
+      {% for post in latest_posts %}
+      <li> {{ post.title }} </li>
+      <button onclick="up_vote({{post.id}}, {{ post.up_vote_count }} )">Upvote</button>
+      <input type="text" id="up_vote_text_{{ post.id }}" value="{{ post.up_vote_count }}">
+      <br><br>
+      {% endfor %}
+   </ul>
 </body>

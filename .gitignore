@@ -1,7 +1,7 @@
 blog_application.sublime-project
 blog_application.sublime-workspace
 .env
-
+*.swp
 tags
 .tags
 .tags_sorted_by_file
@@ -13,7 +13,7 @@ Profile/migrations/
 staticfiles/
 .idea/
 .idea/dataSources.xml
-.idea/vcs.xml
+.idea/vcs.x
 *~
 
 *.json

@@ -18,25 +18,12 @@ def register(request):
     return render(request, 'basic/register_form.html')
 
 
-def upvote(request, id):
+def upvote(request, ref_name):
     """ Upvotes a given post """
     if request.user:
-        post_item = get_object_or_404(Post, pk=id)
+        post_item = get_object_or_404(Post, pk=ref_name)
         vote = get_object_or_404(Vote, post=post_item)
         vote.up_vote.add(request.user)
         print vote  # for debug purposes only
         return HttpResponse("OK")
-    else:
-        return HttpResponse("Not OK")
-
-
-def downvote(request, id):
-    """ Downvotes a given post """
-    if request.user:
-        post_item = get_object_or_404(Post, pk=id)
-        vote = get_object_or_404(Vote, post=post_item)
-        vote.up_vote.remove(request.user)
-        print vote  # for debug purposes only
-        return HttpResponse("OK")
-    else:
-        return HttpResponse("Not OK")
+    return HttpResponse("Not OK")
