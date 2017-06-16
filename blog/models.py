@@ -44,7 +44,7 @@ class Post(models.Model):
     tags = TaggableManager()
     title = models.CharField(max_length=100)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    descriptiom = models.TextField()
+    description = models.TextField()
 
 
 @receiver(post_save, sender=Post)
