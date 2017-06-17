@@ -10,7 +10,6 @@ signup/migrations/
 basic/migrations/
 Profile/migrations/
 *.pyc
-staticfiles/
 .idea/
 .idea/dataSources.xml
 .idea/vcs.x
@@ -21,7 +20,6 @@ staticfiles/
 
 venv
 *.pyc
-blog_application/settings/local.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -118,7 +116,7 @@ ENV/
 
 # Rope project settings
 .ropeproject
-
+blog_application/static
 # mkdocs documentation
 /site
 

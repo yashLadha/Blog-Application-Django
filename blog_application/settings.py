@@ -1,10 +1,9 @@
 import dj_database_url
 import os
+import django.contrib.auth
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
@@ -17,7 +16,6 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -28,10 +26,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blog.apps.blogConfig',
-    'Profile.apps.ProfileConfig',
-    'basic.apps.basicConfig',
-    'signup.apps.signupConfig',
+    'blog',
+    'Profile',
+    'basic',
+    'signup',
     'pagedown',
 ]
 
@@ -68,10 +66,22 @@ WSGI_APPLICATION = 'blog_application.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
+if not DEBUG:
+    DATABASES = {
+        'default': dj_database_url.config()
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'blog_application',
+            'USER': 'blogadmin',
+            'PASSWORD': 'blogadmin',
+            'HOST': 'localhost',
+            'PORT': '',
+        }
+    }
 
-DATABASES = {
-    'default': dj_database_url.config()
-}
 
 
 # Password validation
@@ -110,16 +120,23 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-PROJECT_ROOT = os.path.dirname(BASE_DIR)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
-
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+print STATIC_ROOT
 STATIC_URL = '/static/'
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
-STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, 'static'),
-)
+STATICFILES_DIRS = [
+    os.path.join(PROJECT_ROOT, 'staticfiles'),
+]
+
 
 LOGIN_REDIRECT_URL = '/'
+
+
+
+
+
+

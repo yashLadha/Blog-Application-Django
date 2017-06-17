@@ -18,15 +18,12 @@ function up_vote (id, counter) {
 
    <!-- Latest compiled and minified JavaScript -->
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/8.3.1/markdown-it.min.js" />
 </head>
 <body>
    <h1>Fetches all the post {{ user }} </h1>
    <ul>
       {% for post in user_posts %}
-      <a href={% url_for %}>
          <li> {{ post.title }} </li>
-      </a>
       <button class="btn btn-primary" onclick="up_vote({{post.id}}, {{ post.up_vote_count }} )">Upvote</button>
       <input type="text"  id="up_vote_text_{{ post.id }}" value="{{ post.up_vote_count }}">
       {% endfor %}
