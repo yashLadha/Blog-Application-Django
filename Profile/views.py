@@ -9,7 +9,7 @@ def show_profile(request):
         print 'Authenticated user'
         user_logged = request.user  # logged in user
         user_posts = Post.get_user_post(user_logged)
-        latest_post = Post.latest_posts()
+        latest_post = Post.latest_posts(user_logged)  # latest post excluding the user posts
         args = {
             'user': user_logged,
             'user_posts' : user_posts,

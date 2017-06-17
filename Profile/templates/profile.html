@@ -1,6 +1,6 @@
 <head>
    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-      crossorigin="anonymous"></script>
+                                                             crossorigin="anonymous"></script>
    <script type="text/javascript">
 function up_vote (id, counter) {
    $.get("/upvote/" + id, function(data) {
@@ -10,14 +10,22 @@ function up_vote (id, counter) {
    });
 }
    </script>
+   <!-- Latest compiled and minified CSS -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+   <!-- Optional theme -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+   <!-- Latest compiled and minified JavaScript -->
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script
 </head>
 <body>
    <h1>Fetches all the post {{ user }} </h1>
    <ul>
       {% for post in user_posts %}
       <li> {{ post.title }} </li>
-      <button onclick="up_vote({{post.id}}, {{ post.up_vote_count }} )">Upvote</button>
-      <input type="text" id="up_vote_text_{{ post.id }}" value="{{ post.up_vote_count }}">
+      <button class="btn btn-primary" onclick="up_vote({{post.id}}, {{ post.up_vote_count }} )">Upvote</button>
+      <input type="text"  id="up_vote_text_{{ post.id }}" value="{{ post.up_vote_count }}">
       {% endfor %}
    </ul>
    <h1>Write posts</h1>
@@ -26,7 +34,7 @@ function up_vote (id, counter) {
    <ul>
       {% for post in latest_posts %}
       <li> {{ post.title }} </li>
-      <button onclick="up_vote({{post.id}}, {{ post.up_vote_count }} )">Upvote</button>
+      <button class="btn btn-primary" onclick="up_vote({{post.id}}, {{ post.up_vote_count }} )">Upvote</button>
       <input type="text" id="up_vote_text_{{ post.id }}" value="{{ post.up_vote_count }}">
       <br><br>
       {% endfor %}

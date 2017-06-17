@@ -36,9 +36,9 @@ class Post(models.Model):
         return vote_obj.up_vote.count()
 
     @staticmethod
-    def latest_posts():
+    def latest_posts(user):
         """ retrieves latest post """
-        return Post.objects.all().order_by('-date')
+        return Post.objects.exclude(author=user).order_by('-date')
 
     date = models.DateTimeField(auto_now=True)
     tags = TaggableManager()
