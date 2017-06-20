@@ -21,6 +21,9 @@ Profile/migrations/
 venv
 *.pyc
 
+bin/
+blog_application/media/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

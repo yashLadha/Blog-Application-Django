@@ -14,4 +14,5 @@ urlpatterns = [
     url(r'^logout/', auth_views.logout, name='log-out'),
     url(r'^', include('basic.urls')),
     url(r'^static/(?P<path>.*)$', serve, { 'document_root': settings.STATIC_ROOT  }),
+    # url(r'^media/(?P<path>.*)$', serve, { 'document_root': settings.MEDIA_ROOT  }),  # For media queries
 ]

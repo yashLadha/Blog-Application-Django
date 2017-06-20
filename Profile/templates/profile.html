@@ -23,7 +23,7 @@ function up_vote (id, counter) {
    <h1>Fetches all the post {{ user }} </h1>
    <ul>
       {% for post in user_posts %}
-         <li> {{ post.title }} </li>
+      <li> {{ post.title }} </li>
       <button class="btn btn-primary" onclick="up_vote({{post.id}}, {{ post.up_vote_count }} )">Upvote</button>
       <input type="text"  id="up_vote_text_{{ post.id }}" value="{{ post.up_vote_count }}">
       {% endfor %}

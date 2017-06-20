@@ -8,6 +8,28 @@ from django.dispatch import receiver
 from taggit.managers import TaggableManager
 
 
+class Person(models.Model):
+    """ Custom representation of User Model """
+
+    def __str__(self):
+        return str(self.user.pk)
+
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    birth_date = models.DateField(blank=True, null=True)
+    profile_images = models.ImageField(upload_to='profiles/', blank=True)
+
+
+@receiver(post_save, sender=User)
+def create_person(sender, instance, created, **kwargs):
+    if created:
+        Person.objects.create(user=instance)
+
+
+@receiver(post_save, sender=User)
+def save_user_person(sender, instance, **kwargs):
+    instance.person.save()
+
+
 class Post(models.Model):
     """ Model representation of post
     date        : date of posting the post
